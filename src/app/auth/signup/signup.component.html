@@ -28,6 +28,16 @@
       <mat-hint align="end">{{ paswInput.value?.length}} / 6</mat-hint>
       <mat-error>Field do not has 6 characters yet</mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Your Birthday"
+        [matDatepicker]="picker"
+        [max]="maxDate"
+      >
+      <mat-datepicker-toggle matSuffix="end" [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
     <button
       type="submit"
       mat-raised-button
