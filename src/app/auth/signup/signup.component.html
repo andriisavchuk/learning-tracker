@@ -34,10 +34,20 @@
         placeholder="Your Birthday"
         [matDatepicker]="picker"
         [max]="maxDate"
+        ngModel
+        name="birthday"
+        required
       >
       <mat-datepicker-toggle matSuffix="end" [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <mat-checkbox
+      labelPosition="before"
+      [ngModel]
+      name="agree"
+      required
+      color="primary"
+    >Agree to Terms and Conditions.</mat-checkbox>
     <button
       type="submit"
       mat-raised-button
