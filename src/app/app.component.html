@@ -3,6 +3,23 @@
     <p>Side nav</p>
   </mat-sidenav>
   <mat-sidenav-content>
-    <router-outlet></router-outlet>
+    <mat-toolbar color="primary">
+      <div>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <div><a routerLink="/">AppLOGO</a></div>
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+        <ul fxLayout="row" fxLayoutGap="15px" class="navbar-top">
+          <li><a routerLink="/signup">SignUp</a></li>
+          <li><a routerLink="/login">Login</a></li>
+          <li><a routerLink="/learning">Learning</a></li>
+        </ul>
+      </div>
+    </mat-toolbar>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
