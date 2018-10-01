@@ -23,3 +23,7 @@ a:active {
   margin: 0;
   padding: 0;
 }
+
+.logo {
+  padding: 10px 0 0 15px;
+}
