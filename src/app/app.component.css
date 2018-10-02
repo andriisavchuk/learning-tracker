@@ -27,3 +27,8 @@ a:active {
 .logo {
   padding: 10px 0 0 15px;
 }
+
+.nav-text {
+  display: inline-block;
+  padding-left: 15px;
+}
