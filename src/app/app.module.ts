@@ -19,6 +19,8 @@ import { LearningComponent } from './learning/learning.component';
 import { CurrentLearningComponent } from './learning/current-learning/current-learning.component';
 import { NewLearningComponent } from './learning/new-learning/new-learning.component';
 import { PastLearningsComponent } from './learning/past-learnings/past-learnings.component';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { PastLearningsComponent } from './learning/past-learnings/past-learnings
     CurrentLearningComponent,
     NewLearningComponent,
     PastLearningsComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
