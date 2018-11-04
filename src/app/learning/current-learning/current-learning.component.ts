@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+
+import { StopLearningComponent } from './stop-learning.component.';
 
 @Component({
   selector: 'app-current-learning',
@@ -9,7 +12,7 @@ export class CurrentLearningComponent implements OnInit {
   progress = 0;
   timer: number;
 
-  constructor() { }
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit() {
     this.timer = setInterval(() => {
@@ -22,6 +25,14 @@ export class CurrentLearningComponent implements OnInit {
 
   onStop() {
     clearInterval(this.timer);
-  }
+    const dialogRef = this.dialog.open(StopLearningComponent, {
+      data: {
+        progress: this.progress
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
 }
