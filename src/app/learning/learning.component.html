@@ -6,4 +6,4 @@
     <app-past-learnings></app-past-learnings>
   </mat-tab>
 </mat-tab-group>
-<app-current-learning *ngIf="ongoingLearning"></app-current-learning>
+<app-current-learning *ngIf="ongoingLearning" (learningExit)="ongoingLearning = false"></app-current-learning>
