@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./learning.component.css']
 })
 export class LearningComponent implements OnInit {
+  /**
+  * Define if current task is started
+  */
+  ongoingLearning = false;
 
   constructor() { }
 

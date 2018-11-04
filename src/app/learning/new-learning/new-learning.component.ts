@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 export interface Tasks {
   value: string;
@@ -11,6 +11,8 @@ export interface Tasks {
   styleUrls: ['./new-learning.component.css']
 })
 export class NewLearningComponent implements OnInit {
+  @Output() learningStart = new EventEmitter<void>();
+
   selectedValue: string;
 
   tasks: Tasks[] = [
@@ -22,6 +24,10 @@ export class NewLearningComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onStartLearning() {
+    this.learningStart.emit();
   }
 
 }

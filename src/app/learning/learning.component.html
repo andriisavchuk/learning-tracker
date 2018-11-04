@@ -1,8 +1,9 @@
-<mat-tab-group>
+<mat-tab-group *ngIf="!ongoingLearning">
   <mat-tab label="New Exercise">
-    <app-new-learning></app-new-learning>
+    <app-new-learning (learningStart)="ongoingLearning = true"></app-new-learning>
   </mat-tab>
   <mat-tab label="Past Exercises">
     <app-past-learnings></app-past-learnings>
   </mat-tab>
 </mat-tab-group>
+<app-current-learning *ngIf="ongoingLearning" (learningExit)="ongoingLearning = false"></app-current-learning>
