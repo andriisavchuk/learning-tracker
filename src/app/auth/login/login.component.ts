@@ -24,4 +24,15 @@ export class LoginComponent implements OnInit {
       })
     });
   }
+
+  /**
+   * Logs user in.
+   */
+  onSubmit() {
+    this.authService.login({
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    });
+    console.log(this.loginForm);
+  }
 }

@@ -1,7 +1,10 @@
+import { Subject } from 'rxjs';
+
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
 
 export class AuthService {
+  authChange = new Subject<boolean>();
   private user: User;
 
   /**
@@ -14,6 +17,7 @@ export class AuthService {
       // Generates fake user ID
       userId: Math.round(Math.random() * 10000).toString()
     };
+    this.authChange.next(true);
   }
 
   /**
@@ -32,6 +36,7 @@ export class AuthService {
    */
   logout() {
     this.user = null;
+    this.authChange.next(false);
   }
 
   /**
