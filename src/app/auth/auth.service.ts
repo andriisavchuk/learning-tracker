@@ -59,6 +59,6 @@ export class AuthService {
    * Returns true or false depends on user authentication status
    */
   isAuth() {
-    return this.user !== null;
+    return this.user != null;
   }
 }
