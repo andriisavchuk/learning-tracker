@@ -1,11 +1,16 @@
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
 
+@Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
   private user: User;
+
+  constructor(private router: Router) {}
 
   /**
    * Registers new user.
@@ -17,7 +22,7 @@ export class AuthService {
       // Generates fake user ID
       userId: Math.round(Math.random() * 10000).toString()
     };
-    this.authChange.next(true);
+    this.router.navigate(['/login']);
   }
 
   /**
@@ -29,6 +34,8 @@ export class AuthService {
       email: authData.email,
       userId: Math.round(Math.random() * 10000).toString()
     };
+    this.authChange.next(true);
+    this.router.navigate(['/learning']);
   }
 
   /**
@@ -37,6 +44,7 @@ export class AuthService {
   logout() {
     this.user = null;
     this.authChange.next(false);
+    this.router.navigate(['/login']);
   }
 
   /**
@@ -44,7 +52,7 @@ export class AuthService {
    * in data, returns new one.
    */
   getUser() {
-    return { ...this.user};
+    return { ...this.user };
   }
 
   /**
