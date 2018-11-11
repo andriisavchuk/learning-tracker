@@ -7,8 +7,6 @@
         placeholder="Your Email"
         ngModel
         name="email"
-        email
-        required
         #emailinput="ngModel"
       >
       <mat-error *ngIf="emailinput.hasError('required')">Field could not be empty</mat-error>
@@ -21,9 +19,6 @@
         placeholder="Your Password"
         ngModel
         name="password"
-        required
-        minlength="6"
-        #paswInput
       >
     </mat-form-field>
     <button
