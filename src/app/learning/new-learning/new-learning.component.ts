@@ -8,8 +8,7 @@ import { Exercise } from '../exercise.model';
   styleUrls: ['./new-learning.component.css']
 })
 export class NewLearningComponent implements OnInit {
-  @Output()
-  learningStart = new EventEmitter<void>();
+  // @Output() learningStart = new EventEmitter<void>();
   exercises: Exercise[] = [];
 
   constructor(private learningService: LearningService) {}
@@ -19,6 +18,7 @@ export class NewLearningComponent implements OnInit {
   }
 
   onStartLearning() {
-    this.learningStart.emit();
+    // this.learningStart.emit();
+    this.learningService.startExercise(id);
   }
 }

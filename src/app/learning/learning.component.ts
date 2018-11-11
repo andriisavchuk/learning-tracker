@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { LearningService } from './learning.service';
 
 @Component({
   selector: 'app-learning',
@@ -6,14 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./learning.component.css']
 })
 export class LearningComponent implements OnInit {
-  /**
-  * Define if current task is started
-  */
   ongoingLearning = false;
+  exerciseSubscription: Subscription;
 
-  constructor() { }
+  constructor(private learningService: LearningService) {}
 
   ngOnInit() {
+    this.exerciseSubscription = this.learningService.exerciseChanged.subscribe(
+      exercise => {
+        // this.ongoingLearning = !!exercise; another if-else approach
+        if (exercise) {
+          this.ongoingLearning = true;
+        } else {
+          this.ongoingLearning = false;
+        }
+      }
+    );
   }
-
 }
