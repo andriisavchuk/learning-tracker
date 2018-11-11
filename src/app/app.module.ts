@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AuthService } from './auth/auth.service';
+import { LearningService } from './learning/learning.service';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
@@ -47,7 +48,7 @@ import { StopLearningComponent } from './learning/current-learning/stop-learning
     FlexLayoutModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, LearningService],
   bootstrap: [AppComponent],
   entryComponents: [StopLearningComponent]
 })

@@ -1,9 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-
-export interface Tasks {
-  value: string;
-  viewValue: string;
-}
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { LearningService } from '../learning.service';
+import { Exercise } from '../exercise.model';
 
 @Component({
   selector: 'app-new-learning',
@@ -11,23 +8,17 @@ export interface Tasks {
   styleUrls: ['./new-learning.component.css']
 })
 export class NewLearningComponent implements OnInit {
-  @Output() learningStart = new EventEmitter<void>();
+  @Output()
+  learningStart = new EventEmitter<void>();
+  exercises: Exercise[] = [];
 
-  selectedValue: string;
-
-  tasks: Tasks[] = [
-    {value: 'algorithms-0', viewValue: 'Algorithms'},
-    {value: 'data-1', viewValue: 'Data Structures'},
-    {value: 'java-2', viewValue: 'Java'}
-  ];
-
-  constructor() { }
+  constructor(private learningService: LearningService) {}
 
   ngOnInit() {
+    this.exercises = this.learningService.getAvailableExercises();
   }
 
   onStartLearning() {
     this.learningStart.emit();
   }
-
 }
