@@ -4,5 +4,5 @@ export class Exercise {
   duration: number;
   score: number;
   date?: Date;
-  state?: 'completed' | 'cancalled' | null;
+  state?: 'completed' | 'cancelled' | null;
 }
