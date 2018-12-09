@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { StopLearningComponent } from './stop-learning.component.';
+import { LearningService } from '../learning.service';
 
 @Component({
   selector: 'app-current-learning',
@@ -17,7 +18,7 @@ export class CurrentLearningComponent implements OnInit {
   progress = 0;
   timer: number;
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private learningService: LearningService) {}
 
   ngOnInit() {
     this.startOrResumeTimer();
@@ -27,12 +28,13 @@ export class CurrentLearningComponent implements OnInit {
   * Method that launches or stops a timer for a spinner in a CurrentLearning component
   */
   startOrResumeTimer() {
+    const step = this.learningService.getRunningExercise().duration / 100 * 1000;
     this.timer = setInterval(() => {
-      this.progress = this.progress + 5;
+      this.progress = this.progress + 1;
       if (this.progress >= 100) {
         clearInterval(this.timer);
       }
-    }, 1000);
+    }, step);
   }
 
   /**

@@ -6,10 +6,10 @@ export class LearningService {
   exerciseChanged = new Subject<Exercise>();
   private runningExercise: Exercise;
   private availableExercises: Exercise[] = [
-    { id: 'linkedlist', name: 'Linked List', duration: 180, score: 100 },
+    { id: 'linkedlist', name: 'Linked List', duration: 210, score: 100 },
     { id: 'arraylist', name: 'Array List', duration: 120, score: 100 },
     { id: 'classes', name: 'Classes', duration: 180, score: 100 },
-    { id: 'interfaces', name: 'Interfaces', duration: 180, score: 100 }
+    { id: 'interfaces', name: 'Interfaces', duration: 90, score: 100 }
   ];
 
   /**
@@ -29,5 +29,9 @@ export class LearningService {
     );
     // emits if changes happened
     this.exerciseChanged.next({ ...this.runningExercise });
+  }
+
+  getRunningExercise() {
+    return { ...this.runningExercise };
   }
 }
