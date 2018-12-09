@@ -46,7 +46,7 @@ export class LearningService {
     this.exercises.push({
       ...this.runningExercise,
       duration: this.runningExercise.duration * (progress / 100),
-      score: this.runningExercise.duration * (progress / 100),
+      score: this.runningExercise.score * (progress / 100),
       date: new Date(),
       state: 'completed'
     });
@@ -56,5 +56,9 @@ export class LearningService {
 
   getRunningExercise() {
     return { ...this.runningExercise };
+  }
+
+  getCompletedAndCanceledExercises() {
+    return this.exercises.slice();
   }
 }
