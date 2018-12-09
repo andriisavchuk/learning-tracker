@@ -13,7 +13,7 @@ export class CurrentLearningComponent implements OnInit {
   /**
   * EventEmitter that emits an event when user exits current learning task
   */
-  @Output() learningExit = new EventEmitter();
+  // @Output() learningExit = new EventEmitter();
 
   progress = 0;
   timer: number;
@@ -32,6 +32,7 @@ export class CurrentLearningComponent implements OnInit {
     this.timer = setInterval(() => {
       this.progress = this.progress + 1;
       if (this.progress >= 100) {
+        this.learningService.completeExercise();
         clearInterval(this.timer);
       }
     }, step);
@@ -53,7 +54,8 @@ export class CurrentLearningComponent implements OnInit {
     /*Observable that tracks if the modal dialog window closed*/
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.learningExit.emit();
+        // this.learningExit.emit();
+        this.learningService.cancelExercise(this.progress);
       } else {
         this.startOrResumeTimer();
       }
