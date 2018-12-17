@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { environment } from '../environments/environment';
+
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -43,7 +47,9 @@ import { StopLearningComponent } from './learning/current-learning/stop-learning
     AppRoutingModule,
     MaterialModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [AuthService, LearningService],
   bootstrap: [AppComponent],
