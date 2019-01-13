@@ -27,19 +27,21 @@ export class NewLearningComponent implements OnInit {
     this.exercises = this.db
       .collection('availableExercises')
       .snapshotChanges()
-      .pipe(map(docArray => {
-        return docArray.map(doc => {
-          return {
-            id: doc.payload.doc.id,
-            ...doc.payload.doc.data()
-          };
-        });
-      }));
-      // .subscribe(result => {
-      //   for (const res of result) {
-      //     console.log(result);
-      //   }
-      // });
+      .pipe(
+        map(docArray => {
+          return docArray.map(doc => {
+            return {
+              id: doc.payload.doc.id,
+              ...doc.payload.doc.data()
+            };
+          });
+        })
+      );
+    // .subscribe(result => {
+    //   for (const res of result) {
+    //     console.log(result);
+    //   }
+    // });
   }
 
   onStartLearning(form: NgForm) {
