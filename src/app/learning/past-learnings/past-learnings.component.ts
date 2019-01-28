@@ -15,7 +15,7 @@ export class PastLearningsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private learningService: LearningService) { }
+  constructor(private learningService: LearningService) {}
 
   ngOnInit() {
     this.dataSource.data = this.learningService.getCompletedAndCanceledExercises();
@@ -29,5 +29,4 @@ export class PastLearningsComponent implements OnInit, AfterViewInit {
   doFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
 }
