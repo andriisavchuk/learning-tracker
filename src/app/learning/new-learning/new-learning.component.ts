@@ -14,7 +14,7 @@ import { map } from 'rxjs/operators';
 export class NewLearningComponent implements OnInit {
   // @Output() learningStart = new EventEmitter<void>();
   // exercises: Exercise[] = [];
-  exercises: Observable<any>;
+  exercises: Observable<Exercise[]>;
 
   constructor(
     private learningService: LearningService,
@@ -33,13 +33,13 @@ export class NewLearningComponent implements OnInit {
             return {
               id: doc.payload.doc.id,
               ...doc.payload.doc.data()
-            };
+            } as Exercise;
           });
         })
       );
     // .subscribe(result => {
     //   for (const res of result) {
-    //     console.log(result);
+    //     console.log(res.payload.doc.data());
     //   }
     // });
   }
