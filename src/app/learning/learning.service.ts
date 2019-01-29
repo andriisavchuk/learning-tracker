@@ -9,9 +9,9 @@ import { Exercise } from './exercise.model';
 export class LearningService {
   exerciseChanged = new Subject<Exercise>();
   exercisesChanged = new Subject<Exercise[]>();
+  finishedExercisesChanged = new Subject<Exercise[]>();
   private availableExercises: Exercise[] = [];
   private runningExercise: Exercise;
-  private exercises: Exercise[] = [];
 
   constructor(private db: AngularFirestore) {}
 
@@ -32,10 +32,11 @@ export class LearningService {
             } as Exercise;
           });
         })
-      ).subscribe((exercises: Exercise[]) => {
+      )
+      .subscribe((exercises: Exercise[]) => {
         this.availableExercises = exercises;
         this.exercisesChanged.next([...this.availableExercises]);
-    });
+      });
   }
 
   /**
@@ -66,7 +67,7 @@ export class LearningService {
       duration: this.runningExercise.duration * (progress / 100),
       score: this.runningExercise.score * (progress / 100),
       date: new Date(),
-      state: 'completed'
+      state: 'cancelled'
     });
     this.runningExercise = null;
     this.exerciseChanged.next(null);
@@ -77,7 +78,13 @@ export class LearningService {
   }
 
   getCompletedAndCanceledExercises() {
-    return this.exercises.slice();
+    // return this.exercises.slice(); // used to gate data from hardcoded array
+    this.db
+      .collection('finishedExercises')
+      .valueChanges()
+      .subscribe((exercises: Exercise[]) => {
+        this.finishedExercisesChanged.next(exercises);
+      });
   }
 
   private addDataToDatabase(exercise: Exercise) {
