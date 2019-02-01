@@ -9,8 +9,8 @@ a:active {
   color: lightgray;
 }
 
-.logo {
-  padding: 10px 0 0 15px;
+mat-icon {
+  margin-right: 10px;
 }
 
 .navbar-top {

@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
 import { LearningService } from '../learning/learning.service';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private angFireAuth: AngularFireAuth,
-    private learningService: LearningService
+    private learningService: LearningService,
+    private snackBar: MatSnackBar
   ) {}
 
   /**
@@ -46,7 +48,9 @@ export class AuthService {
       .createUserWithEmailAndPassword(authData.email, authData.password)
       .then(result => {})
       .catch(err => {
-        console.log(err);
+        this.snackBar.open(err.message, null, {
+          duration: 3000
+        });
       });
   }
 
@@ -62,7 +66,9 @@ export class AuthService {
         this.initAuthListener();
       })
       .catch(err => {
-        console.log(err);
+        this.snackBar.open(err.message, null, {
+          duration: 3000
+        });
       });
   }
 
