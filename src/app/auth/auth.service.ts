@@ -5,14 +5,37 @@ import { Subject } from 'rxjs';
 
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
-import { error } from '@angular/compiler/src/util';
+import { LearningService } from '../learning/learning.service';
 
 @Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
   private isAuthenticated = false;
 
-  constructor(private router: Router, private angFireAuth: AngularFireAuth) {}
+  constructor(
+    private router: Router,
+    private angFireAuth: AngularFireAuth,
+    private learningService: LearningService
+  ) {}
+
+  /**
+   * Authentication listener uses when Application starts.
+   * @param authData The object with user data.
+   */
+  initAuthListener() {
+    this.angFireAuth.authState.subscribe(user => {
+      if (user) {
+        this.isAuthenticated = true;
+        this.authChange.next(true);
+        this.router.navigate(['/learning']);
+      } else {
+        this.learningService.cancelSubscriptions();
+        this.authChange.next(false);
+        this.router.navigate(['/login']);
+        this.isAuthenticated = false;
+      }
+    });
+  }
 
   /**
    * Registers new user.
@@ -21,10 +44,7 @@ export class AuthService {
   signupUser(authData: AuthData) {
     this.angFireAuth.auth
       .createUserWithEmailAndPassword(authData.email, authData.password)
-      .then(result => {
-        console.log(result);
-        this.router.navigate(['/login']);
-      })
+      .then(result => {})
       .catch(err => {
         console.log(err);
       });
@@ -39,8 +59,6 @@ export class AuthService {
       .signInWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
         console.log(result);
-        this.authChange.next(true);
-        this.router.navigate(['/learning']);
       })
       .catch(err => {
         console.log(err);
@@ -51,18 +69,8 @@ export class AuthService {
    * Logs out user.
    */
   logout() {
-    this.authChange.next(false);
-    this.router.navigate(['/login']);
-    this.isAuthenticated = false;
+    this.angFireAuth.auth.signOut();
   }
-
-  /**
-   * Gets user object and if there are some changes
-   * in data, returns new one.
-   */
-  // getUser() {
-  //   return { ...this.user };
-  // }
 
   /**
    * Returns true or false depends on user authentication status
