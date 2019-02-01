@@ -59,6 +59,7 @@ export class AuthService {
       .signInWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
         console.log(result);
+        this.initAuthListener();
       })
       .catch(err => {
         console.log(err);

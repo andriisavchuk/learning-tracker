@@ -18,12 +18,9 @@ export class LearningService {
 
   constructor(private db: AngularFirestore) {}
 
-  /**
-   * A getter method that with slice() returns a copy of a same array
-   */
   getAvailableExercises() {
     // return this.availableExercises.slice();
-    this.db
+    this.fbSubscriptions.push(this.db
       .collection('availableExercises')
       .snapshotChanges()
       .pipe(
@@ -39,7 +36,7 @@ export class LearningService {
       .subscribe((exercises: Exercise[]) => {
         this.availableExercises = exercises;
         this.exercisesChanged.next([...this.availableExercises]);
-      });
+      }));
   }
 
   /**
@@ -50,7 +47,6 @@ export class LearningService {
     this.runningExercise = this.availableExercises.find(
       ex => ex.id === selectedId
     );
-    // emits if changes happened
     this.exerciseChanged.next({ ...this.runningExercise });
   }
 
@@ -81,13 +77,12 @@ export class LearningService {
   }
 
   getCompletedAndCanceledExercises() {
-    // return this.exercises.slice(); // used to gate data from hardcoded array
-    this.db
+    this.fbSubscriptions.push(this.db
       .collection('finishedExercises')
       .valueChanges()
       .subscribe((exercises: Exercise[]) => {
         this.finishedExercisesChanged.next(exercises);
-      });
+      }));
   }
 
   cancelSubscriptions() {
