@@ -28,6 +28,7 @@ import { PastLearningsComponent } from './learning/past-learnings/past-learnings
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 import { StopLearningComponent } from './learning/current-learning/stop-learning.component.';
+import { UiService } from './shared/ui.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { StopLearningComponent } from './learning/current-learning/stop-learning
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [AuthService, LearningService],
+  providers: [AuthService, LearningService, UiService],
   bootstrap: [AppComponent],
   entryComponents: [StopLearningComponent]
 })
